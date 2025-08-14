@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Blob animation keyframes with rotation & scale */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1) rotate(15deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9) rotate(-10deg);
+  }
+}
+
+/* Blob floating animation utility */
+.animate-blob {
+  animation: blob 8s infinite ease-in-out;
+}
+
+/* Individual delays for staggered motion */
+.animate-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animate-delay-4000 {
+  animation-delay: 4s;
+}
+
+.animate-delay-6000 {
+  animation-delay: 6s;
+}
+
+/* Optional: add blur and opacity for more depth */
+.blob {
+  border-radius: 50%;
+  opacity: 0.35;
+  filter: blur(80px);
+}
+
+/* Different sizes for variety */
+.blob-sm { width: 56px; height: 56px; }
+.blob-md { width: 72px; height: 72px; }
+.blob-lg { width: 96px; height: 96px; }

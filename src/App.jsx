@@ -2,6 +2,9 @@
 import { useState, useEffect } from "react";
 import Topbar from "./components/Topbar";
 import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
 
 function App() {
   const [showTopbar, setShowTopbar] = useState(true);
@@ -26,6 +29,9 @@ function App() {
     <>
       <Topbar show={showTopbar} />
       <Navbar />
+      <Hero/>
+      <About/>
+      <Skills/>
     </>
   );
 }
