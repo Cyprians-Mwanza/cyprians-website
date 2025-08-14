@@ -34,30 +34,36 @@ const Navbar = () => {
         {/* Logo */}
         <div className="text-2xl font-bold text-blue-600">Cyprian Mwanza</div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6 items-center font-medium">
-          <a href="#home" className="text-gray-700 hover:text-blue-600 transition">
-            Home
-          </a>
-          <a href="#about" className="text-gray-700 hover:text-blue-600 transition">
-            About
-          </a>
-          <a href="#projects" className="text-gray-700 hover:text-blue-600 transition">
-            Projects
-          </a>
-          <a href="#skills" className="text-gray-700 hover:text-blue-600 transition">
-            Skills
-          </a>
-          <a href="#contact" className="text-gray-700 hover:text-blue-600 transition">
-            Contact
-          </a>
+        {/* Desktop Navigation (Centered) */}
+        <div className="hidden md:flex flex-1 justify-center">
+          <nav className="flex space-x-8 items-center font-medium">
+            <a href="#home" className="text-gray-700 hover:text-blue-600 transition">
+              Home
+            </a>
+            <a href="#about" className="text-gray-700 hover:text-blue-600 transition">
+              About
+            </a>
+            <a href="#projects" className="text-gray-700 hover:text-blue-600 transition">
+              Projects
+            </a>
+            <a href="#skills" className="text-gray-700 hover:text-blue-600 transition">
+              Skills
+            </a>
+            <a href="#contact" className="text-gray-700 hover:text-blue-600 transition">
+              Contact
+            </a>
+          </nav>
+        </div>
+
+        {/* Resume Button */}
+        <div className="hidden md:flex">
           <a
             href="resume.pdf"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
           >
             Resume
           </a>
-        </nav>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
