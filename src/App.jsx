@@ -1,13 +1,13 @@
 import Topbar from "./components/Topbar";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+// import Hero from "./components/Hero";
 
 function App() {
   return (
     <>
       <Topbar />
       <Navbar />
-      <Hero />
+      {/* <Hero /> */}
     </>
   );
 }
