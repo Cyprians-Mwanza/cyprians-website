@@ -1,4 +1,3 @@
-// === src/components/Navbar.js ===
 import { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -7,26 +6,51 @@ const Navbar = () => {
   const [showTopbar, setShowTopbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [shadow, setShadow] = useState(false);
-  const [float, setFloat] = useState(0); // For floating effect
+  const [float, setFloat] = useState(0);
+  const [activeSection, setActiveSection] = useState("home");
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const navLinks = [
+    { href: "#home", id: "home", label: "Home" },
+    { href: "#about", id: "about", label: "About" },
+    { href: "#projects", id: "projects", label: "Projects" },
+    { href: "#skills", id: "skills", label: "Skills" },
+    { href: "#experience", id: "experience", label: "Experience" },
+    { href: "#education", id: "education", label: "Education" },
+    { href: "#certifications", id: "certifications", label: "Certifications" },
+    { href: "#leadership", id: "leadership", label: "Leadership" },
+    { href: "#contact", id: "contact", label: "Contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
 
       // Hide/show topbar
-      if (currentY > lastScrollY && currentY > 50) setShowTopbar(false);
-      else setShowTopbar(true);
+      setShowTopbar(!(currentY > lastScrollY && currentY > 50));
 
       // Shadow on scroll
       setShadow(currentY > 10);
 
-      // Floating effect (move navbar up slightly when scrolling down)
-      if (currentY > lastScrollY && currentY > 20) setFloat(-5);
-      else setFloat(0);
+      // Floating effect
+      setFloat(currentY > lastScrollY && currentY > 20 ? -5 : 0);
 
       setLastScrollY(currentY);
+
+      // Detect active section
+      let currentSection = "home";
+      navLinks.forEach((link) => {
+        const section = document.querySelector(link.href);
+        if (section) {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
+          if (currentY >= sectionTop && currentY < sectionTop + sectionHeight) {
+            currentSection = link.id;
+          }
+        }
+      });
+      setActiveSection(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -48,22 +72,20 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex flex-1 justify-center">
-          <nav className="flex space-x-8 items-center font-medium">
-            <a href="#home" className="text-gray-700 hover:text-blue-600 transition">
-              Home
-            </a>
-            <a href="#about" className="text-gray-700 hover:text-blue-600 transition">
-              About
-            </a>
-            <a href="#projects" className="text-gray-700 hover:text-blue-600 transition">
-              Projects
-            </a>
-            <a href="#skills" className="text-gray-700 hover:text-blue-600 transition">
-              Skills
-            </a>
-            <a href="#contact" className="text-gray-700 hover:text-blue-600 transition">
-              Contact
-            </a>
+          <nav className="flex space-x-6 items-center font-medium">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`transition ${
+                  activeSection === link.id
+                    ? "text-blue-600 font-semibold"
+                    : "text-gray-700 hover:text-blue-600"
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
         </div>
 
@@ -93,11 +115,20 @@ const Navbar = () => {
         }`}
       >
         <nav className="flex flex-col items-center py-4 space-y-4">
-          <a href="#home" className="text-gray-700 hover:text-blue-600 transition" onClick={toggleMenu}>Home</a>
-          <a href="#about" className="text-gray-700 hover:text-blue-600 transition" onClick={toggleMenu}>About</a>
-          <a href="#projects" className="text-gray-700 hover:text-blue-600 transition" onClick={toggleMenu}>Projects</a>
-          <a href="#skills" className="text-gray-700 hover:text-blue-600 transition" onClick={toggleMenu}>Skills</a>
-          <a href="#contact" className="text-gray-700 hover:text-blue-600 transition" onClick={toggleMenu}>Contact</a>
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`transition ${
+                activeSection === link.id
+                  ? "text-blue-600 font-semibold"
+                  : "text-gray-700 hover:text-blue-600"
+              }`}
+              onClick={toggleMenu}
+            >
+              {link.label}
+            </a>
+          ))}
           <a
             href="resume.pdf"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition"
