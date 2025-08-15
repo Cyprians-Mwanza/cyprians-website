@@ -27,15 +27,9 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentY = window.scrollY;
 
-      // Hide/show topbar
       setShowTopbar(!(currentY > lastScrollY && currentY > 50));
-
-      // Shadow on scroll
       setShadow(currentY > 10);
-
-      // Floating effect
       setFloat(currentY > lastScrollY && currentY > 20 ? -5 : 0);
-
       setLastScrollY(currentY);
 
       // Detect active section
@@ -43,7 +37,7 @@ const Navbar = () => {
       navLinks.forEach((link) => {
         const section = document.querySelector(link.href);
         if (section) {
-          const sectionTop = section.offsetTop - 100;
+          const sectionTop = section.offsetTop - 120;
           const sectionHeight = section.offsetHeight;
           if (currentY >= sectionTop && currentY < sectionTop + sectionHeight) {
             currentSection = link.id;
@@ -58,6 +52,20 @@ const Navbar = () => {
   }, [lastScrollY]);
 
   const topbarHeight = showTopbar ? 48 : 0;
+
+ const linkClasses = (id) =>
+  `relative transition-all duration-300 ease-in-out
+   after:content-[''] after:absolute after:left-0 after:-bottom-1
+   after:w-full after:h-[2px] after:origin-left after:scale-x-0
+   after:bg-gradient-to-r after:from-blue-500 after:via-purple-500 after:to-pink-500
+   after:bg-[length:200%_100%]
+   after:transition-all after:duration-500 after:ease-in-out
+   ${
+     activeSection === id
+       ? "text-blue-600 font-semibold opacity-100 after:scale-x-100 after:animate-shimmer"
+       : "text-gray-700 hover:text-blue-600 opacity-70 hover:after:scale-x-100 hover:after:animate-shimmer"
+   }`;
+
 
   return (
     <header
@@ -74,15 +82,7 @@ const Navbar = () => {
         <div className="hidden md:flex flex-1 justify-center">
           <nav className="flex space-x-6 items-center font-medium">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`transition ${
-                  activeSection === link.id
-                    ? "text-blue-600 font-semibold"
-                    : "text-gray-700 hover:text-blue-600"
-                }`}
-              >
+              <a key={link.href} href={link.href} className={linkClasses(link.id)}>
                 {link.label}
               </a>
             ))}
@@ -119,11 +119,7 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className={`transition ${
-                activeSection === link.id
-                  ? "text-blue-600 font-semibold"
-                  : "text-gray-700 hover:text-blue-600"
-              }`}
+              className={linkClasses(link.id)}
               onClick={toggleMenu}
             >
               {link.label}
