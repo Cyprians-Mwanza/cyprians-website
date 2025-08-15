@@ -13,12 +13,17 @@ export default {
           '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
           '100%': { transform: 'translate(0px, 0px) scale(1)' },
         },
+        shimmer: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '100% 50%' },
+        },
       },
       animation: {
         blob: 'blob 10s infinite ease-in-out',
         blob1: 'blob 12s infinite ease-in-out',
         blob2: 'blob 15s infinite ease-in-out',
         blob3: 'blob 18s infinite ease-in-out',
+        shimmer: 'shimmer 1.5s linear infinite',
       },
     },
   },
