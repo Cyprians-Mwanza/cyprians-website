@@ -44,3 +44,8 @@
 .blob-sm { width: 56px; height: 56px; }
 .blob-md { width: 72px; height: 72px; }
 .blob-lg { width: 96px; height: 96px; }
+
+/* scroll-smooth */
+html {
+  scroll-behavior: smooth;
+}
